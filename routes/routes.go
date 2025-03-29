@@ -2,6 +2,7 @@ package routes
 
 import (
 	"compress/gzip"
+	"errors"
 	"fmt"
 	"html/template"
 	"log"
@@ -52,7 +53,20 @@ func (d *deps) Index(w http.ResponseWriter, r *http.Request) {
 			d.Write404(w)
 			return
 		}
-
+		if d.c.Repo.CheckGitDaemonExportOk {
+			gdPath, err := securejoin.SecureJoin(path, "git-daemon-export-ok")
+			if err != nil {
+				log.Printf("securejoin error: %v", err)
+				d.Write404(w)
+				return
+			}
+			if _, err := os.Stat(gdPath); err != nil {
+				if !errors.Is(err, os.ErrNotExist) {
+					log.Println(err)
+				}
+				continue
+			}
+		}
 		gr, err := git.Open(path, "")
 		if err != nil {
 			log.Println(err)
