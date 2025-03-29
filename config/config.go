@@ -10,11 +10,12 @@ import (
 
 type Config struct {
 	Repo struct {
-		ScanPath   string   `yaml:"scanPath"`
-		Readme     []string `yaml:"readme"`
-		MainBranch []string `yaml:"mainBranch"`
-		Ignore     []string `yaml:"ignore,omitempty"`
-		Unlisted   []string `yaml:"unlisted,omitempty"`
+		ScanPath               string   `yaml:"scanPath"`
+		Readme                 []string `yaml:"readme"`
+		MainBranch             []string `yaml:"mainBranch"`
+		Ignore                 []string `yaml:"ignore,omitempty"`
+		Unlisted               []string `yaml:"unlisted,omitempty"`
+		CheckGitDaemonExportOk bool     `yaml:"checkGitDaemonExportOk"`
 	} `yaml:"repo"`
 	Dirs struct {
 		Templates string `yaml:"templates"`

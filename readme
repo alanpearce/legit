@@ -42,6 +42,7 @@ Example config.yaml:
       ignore:
         - foo
         - bar
+      checkGitDaemonExportOk: false
     dirs:
       templates: ./templates
       static: ./static
@@ -63,6 +64,7 @@ These options are fairly self-explanatory, but of note are:
 • repo.mainBranch: main branch names to look for.
 • repo.ignore: repos to ignore, relative to scanPath.
 • repo.unlisted: repos to hide, relative to scanPath.
+• repo.checkGitDaemonExportOk: when true, only show repos that can be exported by the git daemon
 • server.name: used for go-import meta tags and clone URLs.
 • meta.syntaxHighlight: this is used to select the syntax theme to render. If left
   blank or removed, the native theme will be used. If an invalid theme is set in this field,
