@@ -17,6 +17,11 @@ func (d *deps) Multiplex(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if d.isIgnored(r.PathValue("name")) {
+		d.Write404(w)
+		return
+	}
+
 	if path == "info/refs" &&
 		r.URL.RawQuery == "service=git-upload-pack" &&
 		r.Method == "GET" {
